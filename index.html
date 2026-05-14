@@ -1,0 +1,436 @@
+<!DOCTYPE html><html class="light" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#d4c4b0",
+                    "on-surface": "#1d1b16",
+                    "on-secondary-container": "#4a6a52",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "sand": "#e8d8c3",
+                    "inverse-surface": "#32302a",
+                    "surface-container": "#f3ede4",
+                    "surface-tint": "#486550",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#fff9ef",
+                    "on-primary-fixed": "#052011",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#9e917e",
+                    "outline-variant": "#c2c8c1",
+                    "on-primary-container": "#163120",
+                    "on-surface-variant": "#424843",
+                    "cream": "#f7f1e8",
+                    "surface-variant": "#e7e2d9",
+                    "secondary": "#46664e",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#02210f",
+                    "on-tertiary-fixed": "#221a0d",
+                    "primary-fixed-dim": "#afceb5",
+                    "surface-container-high": "#ede7df",
+                    "primary-fixed": "#caead0",
+                    "surface": "#fff9ef",
+                    "on-secondary-fixed-variant": "#2f4d38",
+                    "surface-container-highest": "#e7e2d9",
+                    "tertiary": "#685d4c",
+                    "primary": "#486550",
+                    "on-background": "#1d1b16",
+                    "ink": "#25312b",
+                    "primary-container": "#7c9a83",
+                    "inverse-on-surface": "#f6f0e7",
+                    "background": "#fff9ef",
+                    "inverse-primary": "#afceb5",
+                    "surface-container-low": "#f9f3ea",
+                    "surface-dim": "#dfd9d1",
+                    "tertiary-fixed": "#f0e0cb",
+                    "on-tertiary-fixed-variant": "#504536",
+                    "sage-dark": "#4f6f57",
+                    "secondary-container": "#c5e9cb",
+                    "on-tertiary-container": "#332a1c",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#accfb2",
+                    "secondary-fixed": "#c8ebce",
+                    "on-primary-fixed-variant": "#314d3a",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#727972"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "3xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "gutter-md": "16px",
+                    "container-padding": "24px",
+                    "section-gap": "64px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(247, 241, 232, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .soft-shadow {
+            box-shadow: 0 10px 30px -10px rgba(72, 101, 80, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md font-body-md text-body-md docked full-width top-0 sticky bg-surface/40 backdrop-blur-xl shadow-sm z-50">
+<nav class="flex justify-between items-center px-container-padding py-4 max-w-[1200px] mx-auto w-full">
+<div class="font-headline-md text-headline-md text-sage-dark dark:text-primary-fixed font-bold">Sanarte</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Método</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Sesiones</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terapeutas</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Herramientas</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Testimonios</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md hover:opacity-90 active:scale-95 transition-all">
+                WhatsApp
+            </button>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[870px] flex items-center pt-20 pb-section-gap overflow-hidden">
+<div class="max-w-[1200px] mx-auto px-container-padding grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div class="z-10">
+<h1 class="font-display-lg text-display-lg text-ink mb-6">Acompañamiento emocional para atravesar el dolor con consciencia</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
+                        Encontremos juntos el camino hacia tu centro. Un espacio seguro y cálido donde cada emoción tiene lugar y cada proceso es honrado con presencia absoluta.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md soft-shadow hover:bg-sage-dark transition-all">
+                            Agendar una conversación
+                        </button>
+<button class="border-2 border-primary text-primary px-8 py-4 rounded-full font-label-md hover:bg-primary/5 transition-all">
+                            Conocer más
+                        </button>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-[4/5] rounded-3xl overflow-hidden soft-shadow">
+<img alt="Meditación tranquila" class="w-full h-full object-cover" data-alt="A serene woman practicing mindfulness in a sun-drenched minimalist room with neutral tones. The soft morning light creates a warm, ethereal atmosphere, highlighting a peaceful expression on her face. The surrounding environment is sparse yet cozy, featuring a single green plant and cream-colored linens, perfectly aligning with the Sanarte brand colors of sage, cream, and ink. The overall mood is one of profound tranquility and emotional healing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3IwznO6ZTBTEXIT-450uBW7MUai1SesMEVfzgeHA2bATT7kQuck0iyAj0Zw8EqfBKqfE7uZZFD_nRCrqbJj4SAL54rj1O-gEJUb3IjaRMvVdXznQ6HZWZJW8aXjvzoCrcn28MOTTorEFGHJ6dAU7crc61UXg-bkrPu2pgsaB8xjsqoOdKcDgdaUipBJg3vTwUAWOXfwV445SWj8ohTxzllvbgQqW9sQg1EHUc5QWAh7HEIAd1peNrQHLt34q0bZMu_cuTIGK4XYOY">
+</div>
+<div class="absolute -bottom-6 -left-6 glass-card p-6 rounded-2xl soft-shadow max-w-[200px]">
+<p class="font-body-sm text-primary italic">"El dolor es la puerta hacia una nueva versión de ti mismo."</p>
+</div>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="absolute top-0 right-0 -z-10 w-1/3 h-full bg-primary/5 rounded-l-full blur-3xl"></div>
+</section>
+<!-- Sección "Cuando la vida pesa" -->
+<section class="py-section-gap bg-surface-container-low">
+<div class="max-w-[1200px] mx-auto px-container-padding text-center">
+<h2 class="font-headline-lg text-headline-lg text-ink mb-12">Cuando la vida pesa</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Ansiedad -->
+<div class="glass-card p-10 rounded-3xl soft-shadow flex flex-col items-center text-center hover:translate-y-[-8px] transition-transform">
+<span class="material-symbols-outlined text-sage-dark text-5xl mb-6" data-icon="rainy">rainy</span>
+<h3 class="font-headline-md text-headline-md mb-4">Ansiedad</h3>
+<p class="text-on-surface-variant">Esa lluvia persistente que no te deja ver el horizonte. Aprendemos a navegar la incertidumbre con calma.</p>
+</div>
+<!-- Rupturas -->
+<div class="glass-card p-10 rounded-3xl soft-shadow flex flex-col items-center text-center hover:translate-y-[-8px] transition-transform">
+<span class="material-symbols-outlined text-sage-dark text-5xl mb-6" data-icon="heart_broken">heart_broken</span>
+<h3 class="font-headline-md text-headline-md mb-4">Rupturas</h3>
+<p class="text-on-surface-variant">Sanar un corazón herido requiere tiempo, ternura y un espacio donde puedas ser tú misma sin juicios.</p>
+</div>
+<!-- Vacío -->
+<div class="glass-card p-10 rounded-3xl soft-shadow flex flex-col items-center text-center hover:translate-y-[-8px] transition-transform">
+<span class="material-symbols-outlined text-sage-dark text-5xl mb-6" data-icon="light">light</span>
+<h3 class="font-headline-md text-headline-md mb-4">Vacío</h3>
+<p class="text-on-surface-variant">Cuando la chispa parece haberse apagado, encendemos juntos una pequeña vela para redescubrir el sentido.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Sección Método -->
+<section class="py-section-gap overflow-hidden">
+<div class="max-w-[1200px] mx-auto px-container-padding grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="order-2 lg:order-1">
+<div class="rounded-3xl overflow-hidden shadow-xl rotate-[-2deg]">
+<img alt="Journaling y reflexión" class="w-full aspect-square object-cover" data-alt="A top-down aesthetic view of a beautiful leather-bound journal and a delicate pen resting on a light wooden table next to a cup of herbal tea. Natural soft shadows fall across the cream-colored paper. The scene evokes a mood of introspective journaling and emotional clarity. The color palette is dominated by warm creams, deep sage accents from a nearby succulent, and the rich ink of the handwritten notes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7JxN5rwJv7YZHhvb26NR9D9Ka7Oj4R-6po-8rTZhvF8nYMfEJcpGLwNMnwmxR7dDKVILs_iZNKA4F8CkW6mgXIWNnIEMAu0FVmbtYobQr_mHpZpwJc-OJers5UQUiTZQFfU7kMhIqmdIh6xrK6LRNGEvimTdG_-WTeCSsqBfGbEW-N4vzfcBPOZ8KidEmtifrtejWX-9BYrqmYyEBER6YoMx2rwXUjLRJ-rxErr2HMvFwP_OdajKMOVank3PFKJefd5Q3bGkhsfBa">
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="font-headline-lg text-headline-lg text-ink mb-8">Nuestro Método</h2>
+<div class="space-y-8">
+<div class="flex gap-6">
+<div class="bg-primary-container text-on-primary-container w-12 h-12 flex-shrink-0 rounded-full flex items-center justify-center font-bold">1</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">Escuchar</h4>
+<p class="text-on-surface-variant">Damos voz a lo que ha estado en silencio. Un espacio de escucha profunda y sin prisas.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="bg-primary-container text-on-primary-container w-12 h-12 flex-shrink-0 rounded-full flex items-center justify-center font-bold">2</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">Comprender</h4>
+<p class="text-on-surface-variant">Analizamos los patrones y las raíces emocionales para encontrar luz en medio de la confusión.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="bg-primary-container text-on-primary-container w-12 h-12 flex-shrink-0 rounded-full flex items-center justify-center font-bold">3</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">Volver al centro</h4>
+<p class="text-on-surface-variant">Herramientas prácticas y holísticas para reintegrar tu paz y habitar tu presente con plenitud.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Sección Sesiones -->
+<section class="py-section-gap bg-cream">
+<div class="max-w-[1200px] mx-auto px-container-padding">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-ink mb-4">Sesiones de Acompañamiento</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Elige la modalidad que mejor resuene con tu momento actual. Todas las sesiones se realizan de manera ONLINE y personalizada.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Plan 1 -->
+<div class="bg-surface rounded-3xl p-8 soft-shadow border border-outline-variant flex flex-col">
+<h3 class="font-headline-md text-headline-md mb-2">Claridad emocional</h3>
+<p class="text-on-surface-variant mb-6 text-sm">Sesión única para momentos de crisis o decisiones puntuales.</p>
+<div class="text-3xl font-bold text-ink mb-8">S/ 50<span class="text-sm font-normal text-on-surface-variant">/sesión</span></div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> 60 min de sesión</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> Guía de ejercicios básicos</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> Soporte vía email</li>
+</ul>
+<button class="w-full py-3 rounded-full border-2 border-primary text-primary font-label-md hover:bg-primary/5 transition-all">Seleccionar</button>
+</div>
+<!-- Plan 2 (Destacado) -->
+<div class="bg-primary text-on-primary rounded-3xl p-8 shadow-2xl scale-105 z-10 flex flex-col">
+<div class="bg-secondary-container text-on-secondary-container text-[10px] uppercase tracking-widest px-3 py-1 rounded-full w-fit mb-4 font-bold">Más Recomendado</div>
+<h3 class="font-headline-md text-headline-md mb-2">Proceso Integral</h3>
+<p class="text-primary-fixed mb-6 text-sm">Acompañamiento sostenido para una transformación profunda.</p>
+<div class="text-3xl font-bold mb-8">S/ 180<span class="text-sm font-normal opacity-80">/4 sesiones</span></div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-sm" data-icon="check_circle" data-weight="fill">check_circle</span> 4 sesiones mensuales</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-sm" data-icon="check_circle" data-weight="fill">check_circle</span> Plan de trabajo personalizado</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-sm" data-icon="check_circle" data-weight="fill">check_circle</span> Seguimiento por WhatsApp</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-sm" data-icon="check_circle" data-weight="fill">check_circle</span> Material de meditación</li>
+</ul>
+<button class="w-full py-3 rounded-full bg-white text-primary font-label-md hover:bg-cream transition-all">Comenzar Proceso</button>
+</div>
+<!-- Plan 3 -->
+<div class="bg-surface rounded-3xl p-8 soft-shadow border border-outline-variant flex flex-col">
+<h3 class="font-headline-md text-headline-md mb-2">Sesión Holística</h3>
+<p class="text-on-surface-variant mb-6 text-sm">Integración de cuerpo, mente y espíritu con herramientas energéticas.</p>
+<div class="text-3xl font-bold text-ink mb-8">S/ 65<span class="text-sm font-normal text-on-surface-variant">/sesión</span></div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> 90 min de sesión</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> Técnicas de respiración</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> Limpieza energética suave</li>
+</ul>
+<button class="w-full py-3 rounded-full border-2 border-primary text-primary font-label-md hover:bg-primary/5 transition-all">Seleccionar</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Sección Terapeutas -->
+<section class="py-section-gap">
+<div class="max-w-[1200px] mx-auto px-container-padding grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-ink mb-6">Tu guía en este camino</h2>
+<h3 class="font-display-lg text-headline-lg text-primary mb-2">Carlos Estrada - Director</h3><p class="text-body-lg text-on-surface-variant mb-8">Con más de 10 años acompañando procesos humanos, nuestro enfoque combina la psicología transpersonal con herramientas ancestrales. Mi propósito es recordarte que, incluso en la oscuridad más profunda, llevas dentro la brújula para volver a casa.</p>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<div class="text-3xl font-bold text-primary mb-1">10+</div>
+<div class="text-sm text-on-surface-variant uppercase tracking-tighter">Años de experiencia</div>
+</div>
+<div>
+<div class="text-3xl font-bold text-primary mb-1">500+</div>
+<div class="text-sm text-on-surface-variant uppercase tracking-tighter">Procesos acompañados</div>
+</div>
+</div>
+</div>
+<div class="relative px-6">
+<div class="aspect-square rounded-full border-[12px] border-cream overflow-hidden soft-shadow">
+<img alt="Terapeuta Sanarte" class="w-full h-full object-cover" data-alt="A professional yet warm portrait of a female therapist with a kind smile, looking directly at the camera. She is wearing a soft sage-green linen shirt. The background is a blurred, brightly lit office with warm wooden textures and indoor plants, creating a welcoming and safe therapeutic atmosphere. The lighting is soft and natural, emphasizing empathy and professional depth, consistent with the Sanarte brand's digital sanctuary aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiDQcExjrCdI7VBjX18FP7taRSbPCXDAc8FfPRvppepFmfd1Ma7Sc2_ggnVQhsPVuQqSESujijZdGByGRV40yQAfbH4cj8SgMS5wLszMHl33CxekXm1LzNWVp4h-WLLiZAMdUkjAIU79zHJtDr5bmDxW2uJK3h0UbFfLNbHCjXyHDC1rePaBhYnypPgQoSQj4q_-BD7JGwYAnlbTML1wU-_h-Nh2Bi1_bSxRTEiw3CoHU1YrMrS-6H_RxKpqMriLhOzKaaDpJxj9tx">
+</div>
+<div class="absolute top-1/2 -right-4 translate-y-[-50%] bg-white p-6 rounded-3xl soft-shadow max-w-[180px] hidden lg:block">
+<div class="flex gap-1 text-tertiary mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+</div>
+<p class="text-xs font-bold italic">"Una presencia que realmente sostiene."</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Sección Herramientas (Bento Grid) -->
+<section class="py-section-gap bg-surface"><div class="max-w-[1200px] mx-auto px-container-padding"><div class="text-center mb-12"><h2 class="font-headline-lg text-headline-lg text-ink mb-4"><span class="material-symbols-outlined align-middle mr-2" data-icon="home_pin">home_pin</span> Terapias Ancestrales Presenciales</h2><div class="w-24 h-1 bg-primary mx-auto mb-6"></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"><div class="space-y-6"><div class="flex gap-4"><span class="material-symbols-outlined text-primary text-3xl" data-icon="energy_savings_leaf">energy_savings_leaf</span><div><h4 class="font-headline-md text-headline-md text-ink">Reiki y Sanación</h4><p class="text-on-surface-variant">Incluye alineación de chakras y sanación a través de la imposici3n de las manos para restaurar tu equilibrio energético natural.</p></div></div><div class="bg-cream p-8 rounded-3xl border border-outline-variant"><div class="flex items-center gap-3 mb-4 text-primary font-bold"><span class="material-symbols-outlined">payments</span><span class="">Inversión Personalizada</span></div><p class="text-on-surface-variant text-body-md">En las terapias presenciales, los precios son de acuerdo a la necesidad del paciente. Realizamos una reunión previa para brindar la tarifa adecuada a tu proceso.</p><button class="mt-6 bg-primary text-on-primary px-8 py-3 rounded-full font-label-md hover:bg-sage-dark transition-all">Agendar reunión previa</button></div></div><div class="relative"><div class="aspect-video rounded-3xl overflow-hidden soft-shadow bg-cream"><img src="https://lh3.googleusercontent.com/aida/ADBb0ugrllB-ob7i4yAu5f8BMuhhkDtTXLoylVyu8HiO8oaNWbvHiiw_qbefg9yj-soqBB6pW1NcwCee1sk-y2zDQNTKhCJEr8j6lNwA8V1IGsIwayNwuvOUtBK_xR3itPUCz-ntyY4nAmUWP59GBcRmF11rmx4pHWv1RtS7QXD7xh_qCZ0ML5OMREV11Tyh-0IXjvLRF7O0WxhMYU762VsqCNXw6vvF3MCKRXBwI-ZxXJUdJVIm9wRhw3F6WPYE" alt="Sesión de Reiki" class="w-full h-full object-cover"></div></div></div></div></section><section class="py-section-gap bg-surface-container-highest">
+<div class="max-w-[1200px] mx-auto px-container-padding">
+<h2 class="font-headline-lg text-headline-lg text-ink mb-12 text-center">Recursos para tu bienestar</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="self_improvement">self_improvement</span>
+<span class="font-label-md uppercase">Mindfulness</span>
+</div>
+<div class="bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="air">air</span>
+<span class="font-label-md uppercase">Respiración</span>
+</div>
+<div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="edit_note">edit_note</span>
+<span class="font-label-md uppercase">Escritura</span>
+</div>
+<div class="bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="nature">nature</span>
+<span class="font-label-md uppercase">Naturaleza</span>
+</div>
+<div class="bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="spa">spa</span>
+<span class="font-label-md uppercase">Relajación</span>
+</div>
+<div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="sound_detection_dog_barking">sound_detection_dog_barking</span>
+<span class="font-label-md uppercase">Sonoterapia</span>
+</div>
+<div class="bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="dark_mode">dark_mode</span>
+<span class="font-label-md uppercase">Sueño</span>
+</div>
+<div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="psychology">psychology</span>
+<span class="font-label-md uppercase">Cognición</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonios -->
+<section class="py-section-gap">
+<div class="max-w-[1200px] mx-auto px-container-padding">
+<h2 class="font-headline-lg text-headline-lg text-ink mb-12 text-center">Historias de Sanación</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="glass-card p-8 rounded-3xl italic relative">
+<span class="text-6xl text-primary/10 absolute top-4 left-4 font-serif">“</span>
+<p class="relative z-10 text-on-surface-variant mb-6">"Llegué con mucha ansiedad y después de tres meses siento que por fin puedo respirar. No solo me escucharon, me enseñaron a escucharme a mí misma."</p>
+<div class="font-bold text-primary">— Marina S.</div>
+</div>
+<div class="glass-card p-8 rounded-3xl italic relative">
+<span class="text-6xl text-primary/10 absolute top-4 left-4 font-serif">“</span>
+<p class="relative z-10 text-on-surface-variant mb-6">"El enfoque holístico cambió mi perspectiva sobre el duelo. Fue un proceso tierno y muy revelador. Sanarte es realmente un santuario."</p>
+<div class="font-bold text-primary">— Carlos R.</div>
+</div>
+<div class="glass-card p-8 rounded-3xl italic relative">
+<span class="text-6xl text-primary/10 absolute top-4 left-4 font-serif">“</span>
+<p class="relative z-10 text-on-surface-variant mb-6">"Las herramientas de respiración que aprendí las uso a diario. Gracias por acompañarme a volver a mi centro con tanta paciencia."</p>
+<div class="font-bold text-primary">— Elena M.</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Aviso Ético -->
+<section class="mb-section-gap px-container-padding">
+<div class="max-w-[800px] mx-auto bg-tertiary-fixed text-on-tertiary-fixed p-10 rounded-3xl flex items-start gap-6">
+<span class="material-symbols-outlined text-3xl flex-shrink-0" data-icon="info">info</span>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2">Aviso Ético</h3>
+<p class="text-body-sm opacity-90">Este es un espacio de acompañamiento emocional y holístico. No sustituye la terapia clínica psicológica ni el tratamiento psiquiátrico en casos de patologías graves. En caso de emergencia de salud mental, por favor contacte a los servicios médicos de urgencia de su localidad.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<section class="py-section-gap bg-cream" id="contacto">
+<div class="max-w-[800px] mx-auto px-container-padding">
+<div class="bg-surface p-12 rounded-[2rem] soft-shadow text-center">
+<h2 class="font-headline-lg text-headline-lg text-ink mb-4">Inicia tu camino</h2>
+<p class="text-on-surface-variant mb-10">
+        Déjanos tus datos y nos pondremos en contacto contigo para agendar tu primera sesión o resolver cualquier duda.
+      </p>
+<form class="space-y-6 text-left">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant uppercase tracking-wider" for="name">Nombre</label>
+<input class="w-full px-4 py-3 rounded-xl border-outline-variant bg-surface-container-lowest focus:ring-primary focus:border-primary transition-all" id="name" name="name" placeholder="Tu nombre completo" type="text">
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant uppercase tracking-wider" for="phone">Número de celular</label>
+<input class="w-full px-4 py-3 rounded-xl border-outline-variant bg-surface-container-lowest focus:ring-primary focus:border-primary transition-all" id="phone" name="phone" placeholder="Ej: +57 300 000 0000" type="tel">
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant uppercase tracking-wider" for="email">Correo electrónico</label>
+<input class="w-full px-4 py-3 rounded-xl border-outline-variant bg-surface-container-lowest focus:ring-primary focus:border-primary transition-all" id="email" name="email" placeholder="ejemplo@correo.com" type="email">
+</div>
+<div class="pt-4 flex justify-center">
+<button class="bg-primary text-on-primary px-12 py-4 rounded-full font-label-md soft-shadow hover:bg-sage-dark transition-all w-full md:w-auto" type="submit">
+            Quiero que me contacten
+          </button>
+</div>
+</form>
+</div>
+</div>
+</section><footer class="bg-surface-container-highest dark:bg-inverse-surface full-width rounded-t-3xl bg-surface-container-highest flat no shadows">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-padding py-section-gap max-w-[1200px] mx-auto w-full">
+<div class="mb-8 md:mb-0">
+<div class="font-headline-md text-headline-md text-sage-dark mb-4 font-bold">Sanarte</div>
+<p class="font-body-sm text-body-sm text-on-tertiary-fixed-variant max-w-[300px]">© 2024 Sanarte. Acompañamiento emocional y holístico. Todos los derechos reservados.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 text-on-tertiary-fixed-variant font-body-sm text-body-sm">
+<a class="hover:text-primary underline transition-all" href="#">Aviso Ético</a>
+<a class="hover:text-primary underline transition-all" href="#">Privacidad</a>
+<a class="hover:text-primary underline transition-all" href="#">Contacto</a>
+<a class="text-primary font-semibold hover:text-primary underline transition-all" href="#">WhatsApp</a>
+</div>
+<div class="mt-8 md:mt-0 flex gap-4">
+<a class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>
