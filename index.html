@@ -101,57 +101,220 @@
       }
     </script>
 <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            overflow-x: hidden;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
         .glass-card {
-            background: rgba(247, 241, 232, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(145deg, rgba(255, 249, 239, 0.68), rgba(247, 241, 232, 0.36));
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 18px 48px -28px rgba(37, 49, 43, 0.28);
         }
         .soft-shadow {
-            box-shadow: 0 10px 30px -10px rgba(72, 101, 80, 0.1);
+            box-shadow: 0 18px 50px -24px rgba(72, 101, 80, 0.28);
+        }
+        .premium-shadow {
+            box-shadow: 0 26px 70px -34px rgba(37, 49, 43, 0.42);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 240ms ease;
+        }
+        .nav-link::after {
+            background: currentColor;
+            bottom: -8px;
+            content: "";
+            height: 1px;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            transform: scaleX(0.4);
+            transform-origin: left;
+            transition: opacity 240ms ease, transform 240ms ease;
+            width: 100%;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+        .premium-button {
+            align-items: center;
+            display: inline-flex;
+            justify-content: center;
+            min-height: 48px;
+            transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease;
+        }
+        .premium-button:hover {
+            box-shadow: 0 18px 42px -24px rgba(37, 49, 43, 0.45);
+            transform: translateY(-2px);
+        }
+        .premium-button:active {
+            transform: translateY(0) scale(0.99);
+        }
+        .premium-card {
+            transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+        }
+        .premium-card:hover {
+            border-color: rgba(72, 101, 80, 0.24);
+            box-shadow: 0 26px 70px -34px rgba(37, 49, 43, 0.38);
+            transform: translateY(-6px);
+        }
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 700ms ease, transform 700ms ease;
+        }
+        .section-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .image-frame img {
+            transition: transform 700ms ease, filter 700ms ease;
+        }
+        .image-frame:hover img {
+            filter: saturate(1.03) contrast(1.02);
+            transform: scale(1.035);
+        }
+        .soft-divider {
+            position: relative;
+        }
+        .soft-divider::before {
+            background: linear-gradient(90deg, transparent, rgba(72, 101, 80, 0.16), transparent);
+            content: "";
+            height: 1px;
+            left: 50%;
+            max-width: 980px;
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%);
+            width: calc(100% - 48px);
+        }
+        .form-field {
+            min-height: 52px;
+            transition: border-color 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+        }
+        .form-field:focus {
+            box-shadow: 0 0 0 4px rgba(72, 101, 80, 0.12);
+        }
+        .mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-8px);
+            transition: max-height 280ms ease, opacity 220ms ease, transform 220ms ease;
+        }
+        .mobile-menu.open {
+            max-height: 360px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 767px) {
+            header nav,
+            #inicio > div {
+                max-width: 100vw !important;
+                width: 100vw !important;
+            }
+            #inicio .min-w-0,
+            #inicio .relative {
+                max-width: calc(100vw - 48px);
+            }
+            .hero-title {
+                font-size: clamp(2rem, 8.5vw, 2.12rem) !important;
+                hyphens: auto;
+                line-height: 1.12 !important;
+                max-width: 100%;
+                overflow-wrap: anywhere;
+                word-break: normal;
+            }
+            #inicio .font-label-md {
+                font-size: 11px !important;
+                letter-spacing: 0.12em;
+                line-height: 1.5;
+                max-width: 300px;
+            }
+            .floating-whatsapp {
+                bottom: 18px;
+                right: 18px;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
 <!-- TopNavBar -->
-<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md font-body-md text-body-md docked full-width top-0 sticky bg-surface/40 backdrop-blur-xl shadow-sm z-50">
-<nav class="flex justify-between items-center px-container-padding py-4 max-w-[1200px] mx-auto w-full">
-<div class="font-headline-md text-headline-md text-sage-dark dark:text-primary-fixed font-bold">Sanarte</div>
+<header class="font-body-md text-body-md sticky top-0 z-50 border-b border-outline-variant/40 bg-surface/75 backdrop-blur-xl">
+<nav class="flex justify-between items-center px-container-padding py-3.5 max-w-[1200px] mx-auto w-full">
+<a class="font-headline-md text-headline-md text-sage-dark dark:text-primary-fixed font-bold tracking-normal" href="#inicio" aria-label="Ir al inicio">Sanarte</a>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Método</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Sesiones</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terapeutas</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Herramientas</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Testimonios</a>
+<a class="nav-link active text-primary font-bold" href="#metodo">Método</a>
+<a class="nav-link text-on-surface-variant hover:text-primary" href="#sesiones">Sesiones</a>
+<a class="nav-link text-on-surface-variant hover:text-primary" href="#terapeutas">Terapeutas</a>
+<a class="nav-link text-on-surface-variant hover:text-primary" href="#herramientas">Herramientas</a>
+<a class="nav-link text-on-surface-variant hover:text-primary" href="#testimonios">Testimonios</a>
 </div>
-<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md hover:opacity-90 active:scale-95 transition-all">
+<div class="flex items-center gap-3">
+<a class="premium-button hidden sm:inline-flex bg-primary text-on-primary px-6 py-2 rounded-full font-label-md" href="https://wa.me/" target="_blank" rel="noopener">
                 WhatsApp
-            </button>
+            </a>
+<button class="md:hidden w-11 h-11 rounded-full bg-primary/10 text-primary flex items-center justify-center transition-colors hover:bg-primary hover:text-on-primary" id="mobile-menu-button" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
 </nav>
+<div class="mobile-menu md:hidden border-t border-outline-variant/40 bg-surface/95 backdrop-blur-xl" id="mobile-menu">
+<div class="px-container-padding py-4 flex flex-col gap-1 max-w-[1200px] mx-auto">
+<a class="py-3 text-on-surface-variant hover:text-primary transition-colors" href="#metodo">Método</a>
+<a class="py-3 text-on-surface-variant hover:text-primary transition-colors" href="#sesiones">Sesiones</a>
+<a class="py-3 text-on-surface-variant hover:text-primary transition-colors" href="#terapeutas">Terapeutas</a>
+<a class="py-3 text-on-surface-variant hover:text-primary transition-colors" href="#herramientas">Herramientas</a>
+<a class="py-3 text-on-surface-variant hover:text-primary transition-colors" href="#testimonios">Testimonios</a>
+<a class="premium-button mt-2 bg-primary text-on-primary px-6 py-3 rounded-full font-label-md" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+</div>
 </header>
 <main>
 <!-- Hero Section -->
-<section class="relative min-h-[870px] flex items-center pt-20 pb-section-gap overflow-hidden">
-<div class="max-w-[1200px] mx-auto px-container-padding grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-<div class="z-10">
-<h1 class="font-display-lg text-display-lg text-ink mb-6">Acompañamiento emocional para atravesar el dolor con consciencia</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
+<section class="relative min-h-[820px] md:min-h-[870px] flex items-center pt-16 md:pt-20 pb-20 md:pb-section-gap overflow-hidden" id="inicio">
+<div class="w-full max-w-[1200px] min-w-0 mx-auto px-container-padding grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+<div class="z-10 min-w-0">
+<p class="font-label-md uppercase text-primary tracking-widest mb-4">Acompañamiento emocional holístico</p>
+<h1 class="hero-title font-display-lg text-display-lg text-ink mb-6 max-w-[680px]">Acompañamiento emocional para atravesar el dolor con consciencia</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl">
                         Encontremos juntos el camino hacia tu centro. Un espacio seguro y cálido donde cada emoción tiene lugar y cada proceso es honrado con presencia absoluta.
                     </p>
 <div class="flex flex-col sm:flex-row gap-4">
-<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md soft-shadow hover:bg-sage-dark transition-all">
+<a class="premium-button bg-primary text-on-primary px-8 py-4 rounded-full font-label-md soft-shadow hover:bg-sage-dark" href="#contacto">
                             Agendar una conversación
-                        </button>
-<button class="border-2 border-primary text-primary px-8 py-4 rounded-full font-label-md hover:bg-primary/5 transition-all">
+                        </a>
+<a class="premium-button border-2 border-primary text-primary px-8 py-4 rounded-full font-label-md hover:bg-primary/5" href="#metodo">
                             Conocer más
-                        </button>
+                        </a>
 </div>
 </div>
 <div class="relative">
-<div class="aspect-[4/5] rounded-3xl overflow-hidden soft-shadow">
+<div class="image-frame aspect-[4/5] rounded-3xl overflow-hidden premium-shadow">
 <img alt="Meditación tranquila" class="w-full h-full object-cover" data-alt="A serene woman practicing mindfulness in a sun-drenched minimalist room with neutral tones. The soft morning light creates a warm, ethereal atmosphere, highlighting a peaceful expression on her face. The surrounding environment is sparse yet cozy, featuring a single green plant and cream-colored linens, perfectly aligning with the Sanarte brand colors of sage, cream, and ink. The overall mood is one of profound tranquility and emotional healing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3IwznO6ZTBTEXIT-450uBW7MUai1SesMEVfzgeHA2bATT7kQuck0iyAj0Zw8EqfBKqfE7uZZFD_nRCrqbJj4SAL54rj1O-gEJUb3IjaRMvVdXznQ6HZWZJW8aXjvzoCrcn28MOTTorEFGHJ6dAU7crc61UXg-bkrPu2pgsaB8xjsqoOdKcDgdaUipBJg3vTwUAWOXfwV445SWj8ohTxzllvbgQqW9sQg1EHUc5QWAh7HEIAd1peNrQHLt34q0bZMu_cuTIGK4XYOY">
 </div>
-<div class="absolute -bottom-6 -left-6 glass-card p-6 rounded-2xl soft-shadow max-w-[200px]">
+<div class="absolute -bottom-5 left-4 md:-bottom-6 md:-left-6 glass-card p-5 md:p-6 rounded-2xl max-w-[220px]">
 <p class="font-body-sm text-primary italic">"El dolor es la puerta hacia una nueva versión de ti mismo."</p>
 </div>
 </div>
@@ -160,24 +323,24 @@
 <div class="absolute top-0 right-0 -z-10 w-1/3 h-full bg-primary/5 rounded-l-full blur-3xl"></div>
 </section>
 <!-- Sección "Cuando la vida pesa" -->
-<section class="py-section-gap bg-surface-container-low">
+<section class="py-20 md:py-24 bg-surface-container-low soft-divider">
 <div class="max-w-[1200px] mx-auto px-container-padding text-center">
 <h2 class="font-headline-lg text-headline-lg text-ink mb-12">Cuando la vida pesa</h2>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 <!-- Ansiedad -->
-<div class="glass-card p-10 rounded-3xl soft-shadow flex flex-col items-center text-center hover:translate-y-[-8px] transition-transform">
+<div class="premium-card glass-card p-8 md:p-10 rounded-3xl flex flex-col items-center text-center">
 <span class="material-symbols-outlined text-sage-dark text-5xl mb-6" data-icon="rainy">rainy</span>
 <h3 class="font-headline-md text-headline-md mb-4">Ansiedad</h3>
 <p class="text-on-surface-variant">Esa lluvia persistente que no te deja ver el horizonte. Aprendemos a navegar la incertidumbre con calma.</p>
 </div>
 <!-- Rupturas -->
-<div class="glass-card p-10 rounded-3xl soft-shadow flex flex-col items-center text-center hover:translate-y-[-8px] transition-transform">
+<div class="premium-card glass-card p-8 md:p-10 rounded-3xl flex flex-col items-center text-center">
 <span class="material-symbols-outlined text-sage-dark text-5xl mb-6" data-icon="heart_broken">heart_broken</span>
 <h3 class="font-headline-md text-headline-md mb-4">Rupturas</h3>
 <p class="text-on-surface-variant">Sanar un corazón herido requiere tiempo, ternura y un espacio donde puedas ser tú misma sin juicios.</p>
 </div>
 <!-- Vacío -->
-<div class="glass-card p-10 rounded-3xl soft-shadow flex flex-col items-center text-center hover:translate-y-[-8px] transition-transform">
+<div class="premium-card glass-card p-8 md:p-10 rounded-3xl flex flex-col items-center text-center">
 <span class="material-symbols-outlined text-sage-dark text-5xl mb-6" data-icon="light">light</span>
 <h3 class="font-headline-md text-headline-md mb-4">Vacío</h3>
 <p class="text-on-surface-variant">Cuando la chispa parece haberse apagado, encendemos juntos una pequeña vela para redescubrir el sentido.</p>
@@ -186,10 +349,10 @@
 </div>
 </section>
 <!-- Sección Método -->
-<section class="py-section-gap overflow-hidden">
+<section class="py-20 md:py-28 overflow-hidden" id="metodo">
 <div class="max-w-[1200px] mx-auto px-container-padding grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 <div class="order-2 lg:order-1">
-<div class="rounded-3xl overflow-hidden shadow-xl rotate-[-2deg]">
+<div class="image-frame rounded-3xl overflow-hidden premium-shadow rotate-[-1.5deg]">
 <img alt="Journaling y reflexión" class="w-full aspect-square object-cover" data-alt="A top-down aesthetic view of a beautiful leather-bound journal and a delicate pen resting on a light wooden table next to a cup of herbal tea. Natural soft shadows fall across the cream-colored paper. The scene evokes a mood of introspective journaling and emotional clarity. The color palette is dominated by warm creams, deep sage accents from a nearby succulent, and the rich ink of the handwritten notes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7JxN5rwJv7YZHhvb26NR9D9Ka7Oj4R-6po-8rTZhvF8nYMfEJcpGLwNMnwmxR7dDKVILs_iZNKA4F8CkW6mgXIWNnIEMAu0FVmbtYobQr_mHpZpwJc-OJers5UQUiTZQFfU7kMhIqmdIh6xrK6LRNGEvimTdG_-WTeCSsqBfGbEW-N4vzfcBPOZ8KidEmtifrtejWX-9BYrqmYyEBER6YoMx2rwXUjLRJ-rxErr2HMvFwP_OdajKMOVank3PFKJefd5Q3bGkhsfBa">
 </div>
 </div>
@@ -222,7 +385,7 @@
 </div>
 </section>
 <!-- Sección Sesiones -->
-<section class="py-section-gap bg-cream">
+<section class="py-20 md:py-28 bg-cream soft-divider" id="sesiones">
 <div class="max-w-[1200px] mx-auto px-container-padding">
 <div class="text-center mb-16">
 <h2 class="font-headline-lg text-headline-lg text-ink mb-4">Sesiones de Acompañamiento</h2>
@@ -230,7 +393,7 @@
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 <!-- Plan 1 -->
-<div class="bg-surface rounded-3xl p-8 soft-shadow border border-outline-variant flex flex-col">
+<div class="premium-card bg-surface rounded-3xl p-8 soft-shadow border border-outline-variant flex flex-col">
 <h3 class="font-headline-md text-headline-md mb-2">Claridad emocional</h3>
 <p class="text-on-surface-variant mb-6 text-sm">Sesión única para momentos de crisis o decisiones puntuales.</p>
 <div class="text-3xl font-bold text-ink mb-8">S/ 50<span class="text-sm font-normal text-on-surface-variant">/sesión</span></div>
@@ -239,10 +402,10 @@
 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> Guía de ejercicios básicos</li>
 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> Soporte vía email</li>
 </ul>
-<button class="w-full py-3 rounded-full border-2 border-primary text-primary font-label-md hover:bg-primary/5 transition-all">Seleccionar</button>
+<a class="premium-button w-full py-3 rounded-full border-2 border-primary text-primary font-label-md hover:bg-primary/5" href="#contacto">Seleccionar</a>
 </div>
 <!-- Plan 2 (Destacado) -->
-<div class="bg-primary text-on-primary rounded-3xl p-8 shadow-2xl scale-105 z-10 flex flex-col">
+<div class="premium-card bg-primary text-on-primary rounded-3xl p-8 premium-shadow md:scale-105 z-10 flex flex-col">
 <div class="bg-secondary-container text-on-secondary-container text-[10px] uppercase tracking-widest px-3 py-1 rounded-full w-fit mb-4 font-bold">Más Recomendado</div>
 <h3 class="font-headline-md text-headline-md mb-2">Proceso Integral</h3>
 <p class="text-primary-fixed mb-6 text-sm">Acompañamiento sostenido para una transformación profunda.</p>
@@ -253,10 +416,10 @@
 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-sm" data-icon="check_circle" data-weight="fill">check_circle</span> Seguimiento por WhatsApp</li>
 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-sm" data-icon="check_circle" data-weight="fill">check_circle</span> Material de meditación</li>
 </ul>
-<button class="w-full py-3 rounded-full bg-white text-primary font-label-md hover:bg-cream transition-all">Comenzar Proceso</button>
+<a class="premium-button w-full py-3 rounded-full bg-white text-primary font-label-md hover:bg-cream" href="#contacto">Comenzar Proceso</a>
 </div>
 <!-- Plan 3 -->
-<div class="bg-surface rounded-3xl p-8 soft-shadow border border-outline-variant flex flex-col">
+<div class="premium-card bg-surface rounded-3xl p-8 soft-shadow border border-outline-variant flex flex-col">
 <h3 class="font-headline-md text-headline-md mb-2">Sesión Holística</h3>
 <p class="text-on-surface-variant mb-6 text-sm">Integración de cuerpo, mente y espíritu con herramientas energéticas.</p>
 <div class="text-3xl font-bold text-ink mb-8">S/ 65<span class="text-sm font-normal text-on-surface-variant">/sesión</span></div>
@@ -265,13 +428,13 @@
 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> Técnicas de respiración</li>
 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> Limpieza energética suave</li>
 </ul>
-<button class="w-full py-3 rounded-full border-2 border-primary text-primary font-label-md hover:bg-primary/5 transition-all">Seleccionar</button>
+<a class="premium-button w-full py-3 rounded-full border-2 border-primary text-primary font-label-md hover:bg-primary/5" href="#contacto">Seleccionar</a>
 </div>
 </div>
 </div>
 </section>
 <!-- Sección Terapeutas -->
-<section class="py-section-gap">
+<section class="py-20 md:py-28" id="terapeutas">
 <div class="max-w-[1200px] mx-auto px-container-padding grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 <div>
 <h2 class="font-headline-lg text-headline-lg text-ink mb-6">Tu guía en este camino</h2>
@@ -288,10 +451,10 @@
 </div>
 </div>
 <div class="relative px-6">
-<div class="aspect-square rounded-full border-[12px] border-cream overflow-hidden soft-shadow">
+<div class="image-frame aspect-square rounded-full border-[12px] border-cream overflow-hidden premium-shadow">
 <img alt="Terapeuta Sanarte" class="w-full h-full object-cover" data-alt="A professional yet warm portrait of a female therapist with a kind smile, looking directly at the camera. She is wearing a soft sage-green linen shirt. The background is a blurred, brightly lit office with warm wooden textures and indoor plants, creating a welcoming and safe therapeutic atmosphere. The lighting is soft and natural, emphasizing empathy and professional depth, consistent with the Sanarte brand's digital sanctuary aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiDQcExjrCdI7VBjX18FP7taRSbPCXDAc8FfPRvppepFmfd1Ma7Sc2_ggnVQhsPVuQqSESujijZdGByGRV40yQAfbH4cj8SgMS5wLszMHl33CxekXm1LzNWVp4h-WLLiZAMdUkjAIU79zHJtDr5bmDxW2uJK3h0UbFfLNbHCjXyHDC1rePaBhYnypPgQoSQj4q_-BD7JGwYAnlbTML1wU-_h-Nh2Bi1_bSxRTEiw3CoHU1YrMrS-6H_RxKpqMriLhOzKaaDpJxj9tx">
 </div>
-<div class="absolute top-1/2 -right-4 translate-y-[-50%] bg-white p-6 rounded-3xl soft-shadow max-w-[180px] hidden lg:block">
+<div class="absolute top-1/2 -right-4 translate-y-[-50%] bg-white/90 backdrop-blur p-6 rounded-3xl premium-shadow max-w-[180px] hidden lg:block">
 <div class="flex gap-1 text-tertiary mb-2">
 <span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
 <span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
@@ -305,39 +468,39 @@
 </div>
 </section>
 <!-- Sección Herramientas (Bento Grid) -->
-<section class="py-section-gap bg-surface"><div class="max-w-[1200px] mx-auto px-container-padding"><div class="text-center mb-12"><h2 class="font-headline-lg text-headline-lg text-ink mb-4"><span class="material-symbols-outlined align-middle mr-2" data-icon="home_pin">home_pin</span> Terapias Ancestrales Presenciales</h2><div class="w-24 h-1 bg-primary mx-auto mb-6"></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"><div class="space-y-6"><div class="flex gap-4"><span class="material-symbols-outlined text-primary text-3xl" data-icon="energy_savings_leaf">energy_savings_leaf</span><div><h4 class="font-headline-md text-headline-md text-ink">Reiki y Sanación</h4><p class="text-on-surface-variant">Incluye alineación de chakras y sanación a través de la imposici3n de las manos para restaurar tu equilibrio energético natural.</p></div></div><div class="bg-cream p-8 rounded-3xl border border-outline-variant"><div class="flex items-center gap-3 mb-4 text-primary font-bold"><span class="material-symbols-outlined">payments</span><span class="">Inversión Personalizada</span></div><p class="text-on-surface-variant text-body-md">En las terapias presenciales, los precios son de acuerdo a la necesidad del paciente. Realizamos una reunión previa para brindar la tarifa adecuada a tu proceso.</p><button class="mt-6 bg-primary text-on-primary px-8 py-3 rounded-full font-label-md hover:bg-sage-dark transition-all">Agendar reunión previa</button></div></div><div class="relative"><div class="aspect-video rounded-3xl overflow-hidden soft-shadow bg-cream"><img src="https://lh3.googleusercontent.com/aida/ADBb0ugrllB-ob7i4yAu5f8BMuhhkDtTXLoylVyu8HiO8oaNWbvHiiw_qbefg9yj-soqBB6pW1NcwCee1sk-y2zDQNTKhCJEr8j6lNwA8V1IGsIwayNwuvOUtBK_xR3itPUCz-ntyY4nAmUWP59GBcRmF11rmx4pHWv1RtS7QXD7xh_qCZ0ML5OMREV11Tyh-0IXjvLRF7O0WxhMYU762VsqCNXw6vvF3MCKRXBwI-ZxXJUdJVIm9wRhw3F6WPYE" alt="Sesión de Reiki" class="w-full h-full object-cover"></div></div></div></div></section><section class="py-section-gap bg-surface-container-highest">
+<section class="py-20 md:py-28 bg-surface soft-divider" id="herramientas"><div class="max-w-[1200px] mx-auto px-container-padding"><div class="text-center mb-12"><h2 class="font-headline-lg text-headline-lg text-ink mb-4"><span class="material-symbols-outlined align-middle mr-2" data-icon="home_pin">home_pin</span> Terapias Ancestrales Presenciales</h2><div class="w-20 h-[2px] bg-primary/60 mx-auto mb-6"></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center"><div class="space-y-6"><div class="flex gap-4"><span class="material-symbols-outlined text-primary text-3xl" data-icon="energy_savings_leaf">energy_savings_leaf</span><div><h4 class="font-headline-md text-headline-md text-ink">Reiki y Sanación</h4><p class="text-on-surface-variant">Incluye alineación de chakras y sanación a través de la imposición de las manos para restaurar tu equilibrio energético natural.</p></div></div><div class="premium-card bg-cream p-8 rounded-3xl border border-outline-variant"><div class="flex items-center gap-3 mb-4 text-primary font-bold"><span class="material-symbols-outlined">payments</span><span class="">Inversión Personalizada</span></div><p class="text-on-surface-variant text-body-md">En las terapias presenciales, los precios son de acuerdo a la necesidad del paciente. Realizamos una reunión previa para brindar la tarifa adecuada a tu proceso.</p><a class="premium-button mt-6 bg-primary text-on-primary px-8 py-3 rounded-full font-label-md hover:bg-sage-dark" href="#contacto">Agendar reunión previa</a></div></div><div class="relative"><div class="image-frame aspect-video rounded-3xl overflow-hidden premium-shadow bg-cream"><img src="https://lh3.googleusercontent.com/aida/ADBb0ugrllB-ob7i4yAu5f8BMuhhkDtTXLoylVyu8HiO8oaNWbvHiiw_qbefg9yj-soqBB6pW1NcwCee1sk-y2zDQNTKhCJEr8j6lNwA8V1IGsIwayNwuvOUtBK_xR3itPUCz-ntyY4nAmUWP59GBcRmF11rmx4pHWv1RtS7QXD7xh_qCZ0ML5OMREV11Tyh-0IXjvLRF7O0WxhMYU762VsqCNXw6vvF3MCKRXBwI-ZxXJUdJVIm9wRhw3F6WPYE" alt="Sesión de Reiki" class="w-full h-full object-cover"></div></div></div></div></section><section class="py-20 md:py-24 bg-surface-container-highest soft-divider">
 <div class="max-w-[1200px] mx-auto px-container-padding">
 <h2 class="font-headline-lg text-headline-lg text-ink mb-12 text-center">Recursos para tu bienestar</h2>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-<div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<div class="premium-card glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="self_improvement">self_improvement</span>
 <span class="font-label-md uppercase">Mindfulness</span>
 </div>
-<div class="bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<div class="premium-card bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="air">air</span>
 <span class="font-label-md uppercase">Respiración</span>
 </div>
-<div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<div class="premium-card glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="edit_note">edit_note</span>
 <span class="font-label-md uppercase">Escritura</span>
 </div>
-<div class="bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<div class="premium-card bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="nature">nature</span>
 <span class="font-label-md uppercase">Naturaleza</span>
 </div>
-<div class="bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<div class="premium-card bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="spa">spa</span>
 <span class="font-label-md uppercase">Relajación</span>
 </div>
-<div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<div class="premium-card glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="sound_detection_dog_barking">sound_detection_dog_barking</span>
 <span class="font-label-md uppercase">Sonoterapia</span>
 </div>
-<div class="bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<div class="premium-card bg-primary/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="dark_mode">dark_mode</span>
 <span class="font-label-md uppercase">Sueño</span>
 </div>
-<div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
+<div class="premium-card glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 text-center aspect-square md:aspect-auto md:py-10">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="psychology">psychology</span>
 <span class="font-label-md uppercase">Cognición</span>
 </div>
@@ -345,21 +508,21 @@
 </div>
 </section>
 <!-- Testimonios -->
-<section class="py-section-gap">
+<section class="py-20 md:py-28" id="testimonios">
 <div class="max-w-[1200px] mx-auto px-container-padding">
 <h2 class="font-headline-lg text-headline-lg text-ink mb-12 text-center">Historias de Sanación</h2>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="glass-card p-8 rounded-3xl italic relative">
+<div class="premium-card glass-card p-8 rounded-3xl italic relative">
 <span class="text-6xl text-primary/10 absolute top-4 left-4 font-serif">“</span>
 <p class="relative z-10 text-on-surface-variant mb-6">"Llegué con mucha ansiedad y después de tres meses siento que por fin puedo respirar. No solo me escucharon, me enseñaron a escucharme a mí misma."</p>
 <div class="font-bold text-primary">— Marina S.</div>
 </div>
-<div class="glass-card p-8 rounded-3xl italic relative">
+<div class="premium-card glass-card p-8 rounded-3xl italic relative">
 <span class="text-6xl text-primary/10 absolute top-4 left-4 font-serif">“</span>
 <p class="relative z-10 text-on-surface-variant mb-6">"El enfoque holístico cambió mi perspectiva sobre el duelo. Fue un proceso tierno y muy revelador. Sanarte es realmente un santuario."</p>
 <div class="font-bold text-primary">— Carlos R.</div>
 </div>
-<div class="glass-card p-8 rounded-3xl italic relative">
+<div class="premium-card glass-card p-8 rounded-3xl italic relative">
 <span class="text-6xl text-primary/10 absolute top-4 left-4 font-serif">“</span>
 <p class="relative z-10 text-on-surface-variant mb-6">"Las herramientas de respiración que aprendí las uso a diario. Gracias por acompañarme a volver a mi centro con tanta paciencia."</p>
 <div class="font-bold text-primary">— Elena M.</div>
@@ -368,8 +531,8 @@
 </div>
 </section>
 <!-- Aviso Ético -->
-<section class="mb-section-gap px-container-padding">
-<div class="max-w-[800px] mx-auto bg-tertiary-fixed text-on-tertiary-fixed p-10 rounded-3xl flex items-start gap-6">
+<section class="mb-16 md:mb-section-gap px-container-padding" id="aviso-etico">
+<div class="premium-card max-w-[800px] mx-auto bg-tertiary-fixed text-on-tertiary-fixed p-6 md:p-10 rounded-3xl flex items-start gap-5 md:gap-6">
 <span class="material-symbols-outlined text-3xl flex-shrink-0" data-icon="info">info</span>
 <div>
 <h3 class="font-headline-md text-headline-md mb-2">Aviso Ético</h3>
@@ -379,30 +542,32 @@
 </section>
 </main>
 <!-- Footer -->
-<section class="py-section-gap bg-cream" id="contacto">
+<section class="py-20 md:py-28 bg-cream soft-divider" id="contacto">
 <div class="max-w-[800px] mx-auto px-container-padding">
-<div class="bg-surface p-12 rounded-[2rem] soft-shadow text-center">
+<div class="bg-surface p-6 md:p-12 rounded-[2rem] premium-shadow text-center border border-outline-variant/60">
 <h2 class="font-headline-lg text-headline-lg text-ink mb-4">Inicia tu camino</h2>
 <p class="text-on-surface-variant mb-10">
         Déjanos tus datos y nos pondremos en contacto contigo para agendar tu primera sesión o resolver cualquier duda.
       </p>
-<form class="space-y-6 text-left">
+<form class="space-y-6 text-left" action="https://formsubmit.co/gian.marcal26@gmail.com" method="POST">
+<input type="hidden" name="_subject" value="Nueva solicitud desde Sanarte">
+<input type="hidden" name="_captcha" value="false">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="flex flex-col gap-2">
 <label class="font-label-md text-on-surface-variant uppercase tracking-wider" for="name">Nombre</label>
-<input class="w-full px-4 py-3 rounded-xl border-outline-variant bg-surface-container-lowest focus:ring-primary focus:border-primary transition-all" id="name" name="name" placeholder="Tu nombre completo" type="text">
+<input class="form-field w-full px-4 py-3 rounded-xl border-outline-variant bg-surface-container-lowest focus:ring-primary focus:border-primary transition-all" id="name" name="name" placeholder="Tu nombre completo" type="text" autocomplete="name" required>
 </div>
 <div class="flex flex-col gap-2">
 <label class="font-label-md text-on-surface-variant uppercase tracking-wider" for="phone">Número de celular</label>
-<input class="w-full px-4 py-3 rounded-xl border-outline-variant bg-surface-container-lowest focus:ring-primary focus:border-primary transition-all" id="phone" name="phone" placeholder="Ej: +57 300 000 0000" type="tel">
+<input class="form-field w-full px-4 py-3 rounded-xl border-outline-variant bg-surface-container-lowest focus:ring-primary focus:border-primary transition-all" id="phone" name="phone" placeholder="Ej: +51 900 000 000" type="tel" autocomplete="tel" required>
 </div>
 </div>
 <div class="flex flex-col gap-2">
 <label class="font-label-md text-on-surface-variant uppercase tracking-wider" for="email">Correo electrónico</label>
-<input class="w-full px-4 py-3 rounded-xl border-outline-variant bg-surface-container-lowest focus:ring-primary focus:border-primary transition-all" id="email" name="email" placeholder="ejemplo@correo.com" type="email">
+<input class="form-field w-full px-4 py-3 rounded-xl border-outline-variant bg-surface-container-lowest focus:ring-primary focus:border-primary transition-all" id="email" name="email" placeholder="ejemplo@correo.com" type="email" autocomplete="email" required>
 </div>
 <div class="pt-4 flex justify-center">
-<button class="bg-primary text-on-primary px-12 py-4 rounded-full font-label-md soft-shadow hover:bg-sage-dark transition-all w-full md:w-auto" type="submit">
+<button class="premium-button bg-primary text-on-primary px-12 py-4 rounded-full font-label-md soft-shadow hover:bg-sage-dark w-full md:w-auto" type="submit">
             Quiero que me contacten
           </button>
 </div>
@@ -416,10 +581,10 @@
 <p class="font-body-sm text-body-sm text-on-tertiary-fixed-variant max-w-[300px]">© 2024 Sanarte. Acompañamiento emocional y holístico. Todos los derechos reservados.</p>
 </div>
 <div class="flex flex-wrap justify-center gap-8 text-on-tertiary-fixed-variant font-body-sm text-body-sm">
-<a class="hover:text-primary underline transition-all" href="#">Aviso Ético</a>
-<a class="hover:text-primary underline transition-all" href="#">Privacidad</a>
-<a class="hover:text-primary underline transition-all" href="#">Contacto</a>
-<a class="text-primary font-semibold hover:text-primary underline transition-all" href="#">WhatsApp</a>
+<a class="hover:text-primary underline transition-all" href="#aviso-etico">Aviso Ético</a>
+<a class="hover:text-primary underline transition-all" href="#contacto">Privacidad</a>
+<a class="hover:text-primary underline transition-all" href="#contacto">Contacto</a>
+<a class="text-primary font-semibold hover:text-primary underline transition-all" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
 </div>
 <div class="mt-8 md:mt-0 flex gap-4">
 <a class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
@@ -431,6 +596,50 @@
 </div>
 </div>
 </footer>
+<a class="floating-whatsapp premium-button fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-primary text-on-primary premium-shadow" href="https://wa.me/" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+<span class="material-symbols-outlined">chat</span>
+</a>
+
+<script>
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener("click", () => {
+                const isOpen = mobileMenu.classList.toggle("open");
+                mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+                mobileMenuButton.querySelector(".material-symbols-outlined").textContent = isOpen ? "close" : "menu";
+            });
+
+            mobileMenu.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.remove("open");
+                    mobileMenuButton.setAttribute("aria-expanded", "false");
+                    mobileMenuButton.querySelector(".material-symbols-outlined").textContent = "menu";
+                });
+            });
+        }
+
+        const revealTargets = document.querySelectorAll("main > section, footer, .premium-card");
+
+        if ("IntersectionObserver" in window) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            revealTargets.forEach((target) => {
+                target.classList.add("section-reveal");
+                revealObserver.observe(target);
+            });
+        } else {
+            revealTargets.forEach((target) => target.classList.add("is-visible"));
+        }
+    </script>
 
 
 </body></html>
